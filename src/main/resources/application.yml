@@ -1,0 +1,25 @@
+
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/dbnews?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: edu.hfut.hawk_eye.entity
+
+
+logging:
+  level:
+    com:
+      example:
+        mapper : debug
+
+devtools:
+  livereload:
+    enabled: true #是否支持livereload
+    port: 35729
+  restart:
+    enabled: true #是否支持热部署

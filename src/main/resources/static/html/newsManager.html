@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Insert title here</title>
+
+
+
+</head>
+<body>
+
+<a href="addNews.html">添加新闻</a><br/>
+<br/>
+<br/>
+<input type="text" value="请输入关键字搜索" id="key" onfocus="empty()" /><input type="button" value="搜索" onclick="serch()">
+<hr>
+
+
+ <table border="1" align="center" id = "table">
+
+
+ </table>
+
+</body>
+<script type="text/javascript" src="/js/jquery.1.12.4.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+    var tableHead = "<tr>\n" +
+        "        <td>序号</td>\n" +
+        "        <td>新闻标题</td>\n" +
+        "        <td>新闻内容</td>\n" +
+        "        <td>发布时间</td>\n" +
+        "        <td>操作</td>\n" +
+        "    </tr>"
+
+function serch(){
+
+	var key=document.getElementById("key").value;
+
+    $.ajax({
+        type: "POST",
+        url: "/news/search",
+        contentType: "application/json",
+        data : key,
+        success:function(data) {
+            console.log(data)
+            if (data.state == 0) {
+                putNews(data.data)
+
+
+            }else {
+             alert(data.message)
+            }
+        }
+    });
+
+}
+function empty(){
+document.getElementById("key").value="";
+}
+
+$(function () {
+    $.get("/news/",function (data) {
+        console.log(data)
+        if (data.state == 0) {
+            list = data.data
+            putNews(list)
+        }else {
+         alert(data.message)
+        }
+    })
+});
+
+
+
+function putNews(list) {
+    var html = ""
+    for (var i = 0; i < list.length; i++) {
+        var news = list[i]
+        html += "<tr>\n" +
+            "     <td>"+(i + 1)+"</td>\n" +
+            "     <td style='min-width: 50px'>"+news.title+"</td>\n" +
+            "     <td>"+news.content+"</td>\n" +
+            "     <td>"+news.pubTime+"</td>\n" +
+            "     <td style='min-width: 80px' >\n" +
+            "     <a href=\"showNews.html?title="+news.title+"&content="+news.content+"\"\>查看详情</a>\n" +
+                "<br/>" +
+            "     <a href=\"javascript:deleteNews("+ news.id +")\">删除</a>\n" +
+                "<br/>" +
+            "     <a href=\"updateNews.html?newsid="+ news.id +"&title="+news.title+"&content="+news.content+"&pubtime="+news.pubTime+"&userId="+news.userId+"\">修改</a>\n" +
+            "     </td>\n" +
+            "   </tr>\n" +
+            "   <input type=\"hidden\" name=\"id\" value=\""+ news.id +"\">"
+    }
+
+    document.getElementById("table").innerHTML = tableHead + html
+}
+
+
+    function deleteNews(id) {
+
+     $.ajax({
+      type: "DELETE",
+      url: "/news/" + id,
+      success: function (data) {
+       if (data.state == 0) {
+        top.location.replace("/html/index.html")
+       } else {
+        alert(data.message)
+       }
+      }
+     });
+    }
+
+
+
+
+</script>
+</html>
