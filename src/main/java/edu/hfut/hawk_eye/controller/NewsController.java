@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * @author lenovo
+ */
 @RestController
 @RequestMapping("/news")
 public class NewsController {
@@ -79,6 +82,17 @@ public class NewsController {
     public ResponseEntity<JsonResult<List<News>>> get(){
 
         return ResponseEntity.ok(new JsonResult<>(newsService.getAll()));
+    }
+
+    /**
+     * 根据ID获取新闻
+     * @return
+     */
+    @ApiOperation(value="用ID获取新闻", notes="用ID获取新闻")
+    @PostMapping("/get/{id}")
+    public ResponseEntity<JsonResult<News>> getByID(@PathVariable(value = "id") Integer id){
+
+        return ResponseEntity.ok(new JsonResult<>(newsService.getById(id)));
     }
 
 

@@ -34,10 +34,13 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
         addInterceptor.excludePathPatterns("/use*");
         addInterceptor.excludePathPatterns("/new*");
         addInterceptor.excludePathPatterns("/index.html");
+        addInterceptor.excludePathPatterns("/home.html");
+
+
 
         // 拦截配置
-//        addInterceptor.addPathPatterns("/user*");
-//        addInterceptor.addPathPatterns("/news*");
+        //addInterceptor.addPathPatterns("/user*");
+        //addInterceptor.addPathPatterns("/news*");
         addInterceptor.addPathPatterns("/");
     }
 
@@ -52,7 +55,7 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
             }
 
             // 跳转登录
-            String url = "/login.html";
+            String url = "/home.html";
             response.sendRedirect(url);
             return false;
         }

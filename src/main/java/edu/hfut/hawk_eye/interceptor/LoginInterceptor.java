@@ -1,14 +1,15 @@
-package edu.hfut.hawk_eye.interceptor;
-
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
+//package edu.hfut.hawk_eye.interceptor;
+//
+//import org.springframework.web.servlet.ModelAndView;
+//import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+//
+//import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletResponse;
+//import java.io.PrintWriter;
 //
 ///**
 // * 登录拦截器（判断用户是否登录）
+// * @author hjw
 // */
 //public class LoginInterceptor extends HandlerInterceptorAdapter {
 //
